@@ -4,7 +4,7 @@ import { CrateDepartmentAPI,editDepartmentAPI,getDepartmentAPI, getDepartmentByI
 
 export const DepartmentRoutes = express.Router();
 DepartmentRoutes.post("/addDepartment",verifyUser,CrateDepartmentAPI);
-DepartmentRoutes.get("/",verifyUser,getDepartmentAPI);
+DepartmentRoutes.get("/",getDepartmentAPI);
 DepartmentRoutes.get("/:id",verifyUser,getDepartmentByID);
 
 DepartmentRoutes.put("/edit/:id",verifyUser,editDepartmentAPI);
