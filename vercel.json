@@ -7,10 +7,10 @@
   },
   "functions": {
     "api/**/*.js": {
-      "runtime": "nodejs20.x"
+      "runtime": "vercel-node@1.21.0"
     },
     "index.js": {
-      "runtime": "nodejs20.x"
+      "runtime": "vercel-node@1.21.0"
     }
   },
   "routes": [
