@@ -19,21 +19,18 @@ app.use(cors());
 app.use('/Public/uploads', express.static('Public/uploads'));
 
 // routes 
-app.use("/api/auth", authRoutes); 
+app.use("/api/auth", authRoutes);
 app.use("/department", DepartmentRoutes);
 app.use("/api/employee", EmpRoutes)
 app.use("/api/salary", SalaryRoutes)
 app.use("/api/leaves", LeavesRoute)
 
-app.use((req,res)=>{
-DatabaseConnection()//call database connection 
-next()
-})
-
-
-const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-
-//     // userRegistration();
-//     console.log(`Server running on port ${PORT}`);
-// })
+// Export as serverless function for Vercel
+export default async function handler(req, res) {
+  try {
+    await DatabaseConnection(); // Ensure DB is connected
+    app(req, res); // Pass request to Express app
+  } catch (error) {
+    res.status(500).json({ error: "Database connection failed", details: error.message });
+  }
+}

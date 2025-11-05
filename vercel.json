@@ -1,22 +1,14 @@
 {
   "version": 2,
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    }
-  },
   "functions": {
-    "api/**/*.js": {
+    "index.js": {
       "runtime": "vercel-node@1.21.0"
     },
-    "index.js": {
+    "api/**/*.js": {
       "runtime": "vercel-node@1.21.0"
     }
   },
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.js"
-    }
+    { "src": "/(.*)", "dest": "/index.js" }
   ]
 }
