@@ -25,13 +25,15 @@ app.use("/api/employee", EmpRoutes)
 app.use("/api/salary", SalaryRoutes)
 app.use("/api/leaves", LeavesRoute)
 
-
-
+app.use((req,res)=>{
+DatabaseConnection()//call database connection 
+next()
+})
 
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    DatabaseConnection()//call database connection 
-    // userRegistration();
-    console.log(`Server running on port ${PORT}`);
-})
+// app.listen(PORT, () => {
+
+//     // userRegistration();
+//     console.log(`Server running on port ${PORT}`);
+// })

@@ -1,46 +1,49 @@
-// import mongoose from "mongoose";
-// export const DatabaseConnection = async () => {
-//     try {
-//         await mongoose.connect(process.env.MONGODB_URI)
-//         console.log("mongoDB Connected...")
-
-//     } catch (error) {
-//         console.log("DB Connection Failed...")
-
-//     }
-// }
 import mongoose from "mongoose";
+export const DatabaseConnection = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URI,{
+          useNewUrlParser:true,
+          useUnifiedTopology:true
+        })
+        console.log("mongoDB Connected...")
 
-const MONGODB_URI = process.env.MONGODB_URI;
+    } catch (error) {
+        console.log("DB Connection Failed...")
 
-if (!MONGODB_URI) {
-  throw new Error("⚠️ Missing MONGODB_URI environment variable");
+    }
 }
+// import mongoose from "mongoose";
 
-let cached = global.mongoose;
-if (!cached) cached = global.mongoose = { conn: null, promise: null };
+// const MONGODB_URI = process.env.MONGODB_URI;
 
-async function dbConnect() {
-  if (cached.conn) return cached.conn;
+// if (!MONGODB_URI) {
+//   throw new Error("⚠️ Missing MONGODB_URI environment variable");
+// }
 
-  if (!cached.promise) {
-    cached.promise = mongoose
-      .connect(MONGODB_URI, {
-        bufferCommands: false,
-        serverSelectionTimeoutMS: 10000,
-      })
-      .then((mongoose) => {
-        console.log("✅ MongoDB connected");
-        return mongoose;
-      })
-      .catch((err) => {
-        console.error("❌ MongoDB connection error:", err.message);
-        throw err;
-      });
-  }
+// let cached = global.mongoose;
+// if (!cached) cached = global.mongoose = { conn: null, promise: null };
 
-  cached.conn = await cached.promise;
-  return cached.conn;
-}
+// async function dbConnect() {
+//   if (cached.conn) return cached.conn;
 
-export default DatabaseConnection;
+//   if (!cached.promise) {
+//     cached.promise = mongoose
+//       .connect(MONGODB_URI, {
+//         bufferCommands: false,
+//         serverSelectionTimeoutMS: 10000,
+//       })
+//       .then((mongoose) => {
+//         console.log("✅ MongoDB connected");
+//         return mongoose;
+//       })
+//       .catch((err) => {
+//         console.error("❌ MongoDB connection error:", err.message);
+//         throw err;
+//       });
+//   }
+
+//   cached.conn = await cached.promise;
+//   return cached.conn;
+// }
+
+// export default DatabaseConnection;
