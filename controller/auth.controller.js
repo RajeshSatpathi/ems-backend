@@ -5,6 +5,8 @@ import bcrypt from "bcryptjs";
 
 export const loginAPI = async (req, res) => {
     try {
+      
+    await DatabaseConnection();
         const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (!user) {
